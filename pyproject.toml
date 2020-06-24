@@ -15,15 +15,22 @@ numpy = "*"
 pandas = "*"
 pandas_datareader = "*"
 yahoo_fin = "*"
-backtrader = "^1.9.75"
+backtrader = "*"
 
 [tool.poetry.dev-dependencies]
 pytest = "*"
+pytest-pycharm = "*"
 mypy = "*"
-flake8 = "*"
 black = {version="*", allow-prereleases=true}
 isort = "*"
+flake8 = "*"
+flake8-pytest = "*"
+flake8-mypy = "*"
+flake8-black = "*"
+flake8-isort = "*"
 
+[tool.black]
+line-length = 100
 
 [build-system]
 requires = ["poetry>=0.12"]
