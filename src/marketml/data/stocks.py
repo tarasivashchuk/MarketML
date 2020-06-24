@@ -9,24 +9,31 @@ import numpy as np
 from tqdm.auto import tqdm
 from aiostream import stream
 
-lhs_url = 'https://query2.finance.yahoo.com/v10/finance/quoteSummary/'
-rhs_url = '?formatted=true&crumb=swg7qs5y9UP&lang=en-US&region=US&' \
-        'modules=upgradeDowngradeHistory,recommendationTrend,' \
-        'financialData,earningsHistory,earningsTrend,industryTrend&' \
-        'corsDomain=finance.yahoo.com'
+host = "https://query2.finance.yahoo.com/v10/finance/quoteSummary/"
+parameters = {
+    "formatted": "true",
+    "crumb": "swg7qs5y9UP",
+    "lang": "en-US",
+    "region": "US",
+    "modules": "upgradeDowngradeHistory,recommendationTrend,financialData,earningsHistory,earningsTrend,industryTrend",
+    "corsDomain": "finance.yahoo.com"
+
+}
 progress_bar = tqdm()
 recommendations = []
 tickers = []
 
+
 async def download_ticker(session: aiohttp.ClientSession, ticker: str):
     global progress_bar
     global recommendations
-    url =  lhs_url + ticker + rhs_url
+    url = lhs_url + ticker + rhs_url
     async with session.get(url) as r:
         r = await r.json()
         try:
-            result = r['quoteSummary']['result'][0]
-            recommendation = result['financialData']['recommendationMean']['fmt']
+            result = r
+            print(result)
+            # recommendation = result['financialData']['recommendationMean']['fmt']
         except:
             recommendation = 6
         recommendations.append(recommendation)
