@@ -1,37 +1,23 @@
 [tool.poetry]
-name = "marketml"
-version = "0.1.0"
+authors     = ["Taras Ivashchuk <taras@tarasivashchuk.com>"]
 description = "Algorithmic trading using deep learning"
-authors = ["Taras Ivashchuk <taras@tarasivashchuk.com>"]
+name        = "marketml"
+version     = "0.1.0"
 
-[tool.poetry.dependencies]
-python = "^3.8"
-logzero = "*"
-tqdm = "*"
-uvloop = "*"
-aiohttp = "*"
-aiostream = "*"
-numpy = "*"
-pandas = "*"
-pandas_datareader = "*"
-yahoo_fin = "*"
-backtrader = "*"
+        [tool.poetry.dependencies]
+        backtrader        = "*"
+        logzero           = "*"
+        pandas            = "*"
+        pandas_datareader = "*"
+        python            = "^3.8"
+        tqdm              = "*"
+        yahoo_fin         = "*"
 
-[tool.poetry.dev-dependencies]
-pytest = "*"
-pytest-pycharm = "*"
-mypy = "*"
-black = {version="*", allow-prereleases=true}
-isort = "*"
-flake8 = "*"
-flake8-pytest = "*"
-flake8-mypy = "*"
-flake8-black = "*"
-flake8-isort = "*"
+        [tool.poetry.dev-dependencies]
 
 [tool.black]
 line-length = 100
 
 [build-system]
-requires = ["poetry>=0.12"]
 build-backend = "poetry.masonry.api"
+requires      = ["poetry>=0.12"]
