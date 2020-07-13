@@ -1,8 +1,8 @@
-from tensorflow.keras.layers import Input, Concatenate, GlobalAveragePooling1D, Dense, Dropout
-from tensorflow.keras.models import Model
-
 from marketml.models.time import Time2Vector
 from marketml.models.transformer import TransformerEncoder
+from tensorflow.keras.layers import (Concatenate, Dense, Dropout,
+                                     GlobalAveragePooling1D, Input)
+from tensorflow.keras.models import Model
 
 
 def create_transformer_model(sequence_length: int, num_heads: int):

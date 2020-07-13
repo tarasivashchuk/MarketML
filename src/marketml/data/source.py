@@ -1,13 +1,14 @@
 import asyncio
 from typing import List
 
-import aiohttp
-import pandas as pd
-from yahoo_fin import stock_info as si
-from pandas_datareader import DataReader
 import numpy as np
+import pandas as pd
 from tqdm.auto import tqdm
+
+import aiohttp
 from aiostream import stream
+from pandas_datareader import DataReader
+from yahoo_fin import stock_info as si
 
 host = "https://query2.finance.yahoo.com/v10/finance/quoteSummary/"
 parameters = {
@@ -16,8 +17,7 @@ parameters = {
     "lang": "en-US",
     "region": "US",
     "modules": "upgradeDowngradeHistory,recommendationTrend,financialData,earningsHistory,earningsTrend,industryTrend",
-    "corsDomain": "finance.yahoo.com"
-
+    "corsDomain": "finance.yahoo.com",
 }
 progress_bar = tqdm()
 recommendations = []
@@ -46,6 +46,7 @@ def append_recommendations(r, rs):
     progress_bar.update()
     return rs
 
+
 async def main():
     global progress_bar
     global tickers
@@ -58,8 +59,11 @@ async def main():
             tasks.append(task)
         [await _ for _ in asyncio.as_completed(tasks)]
 
+
 asyncio.run(main())
-dataframe = pd.DataFrame(list(zip(tickers, recommendations)), columns =['Company', 'Recommendations'])
-dataframe.set_index('Company', inplace=True)
-dataframe.to_csv('recommendations.csv')
+dataframe = pd.DataFrame(
+    list(zip(tickers, recommendations)), columns=["Company", "Recommendations"]
+)
+dataframe.set_index("Company", inplace=True)
+dataframe.to_csv("recommendations.csv")
 print(dataframe.head())

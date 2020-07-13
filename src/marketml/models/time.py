@@ -1,5 +1,5 @@
 import tensorflow as tf
-from tensorflow.keras.layers import Layer, Dense
+from tensorflow.keras.layers import Dense, Layer
 
 
 class Time2Vector(Layer):
@@ -57,4 +57,3 @@ class Time2Vector(Layer):
         config = super().get_config().copy()
         config.update({"sequence_length": self.vector_length})
         return config
-

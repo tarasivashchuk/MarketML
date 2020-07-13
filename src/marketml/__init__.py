@@ -9,7 +9,7 @@ logzero.logfile(
     filename=str(project_dir.joinpath("logs/debug.log")),
     maxBytes=1024,
     backupCount=1,
-    loglevel=DEBUG
+    loglevel=DEBUG,
 )
 
 logzero.logger.info(f"Project directory: {project_dir}")
