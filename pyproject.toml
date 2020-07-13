@@ -2,18 +2,26 @@
 authors     = ["Taras Ivashchuk <taras@tarasivashchuk.com>"]
 description = "Algorithmic trading using deep learning"
 name        = "marketml"
-version     = "0.1.0"
+version = "0.2.0"
 
-        [tool.poetry.dependencies]
-        backtrader        = "*"
-        logzero           = "*"
-        pandas            = "*"
-        pandas_datareader = "*"
-        python            = "^3.8"
-        tqdm              = "*"
-        yahoo_fin         = "*"
+[tool.poetry.dependencies]
+python = "^3.8"
+jupyter = "*"
+logzero = "*"
+pendulum = "*"
+tqdm = "*"
+plotly = "*"
+pandas = "*"
+pandas_datareader = "*"
+tensorflow = "*"
+yahoo_fin = "*"
+backtrader = "*"
 
-        [tool.poetry.dev-dependencies]
+[tool.poetry.dev-dependencies]
+black = {version="*", allow-prereleases=true}
+isort = "*"
+pytest = "*"
+flake8 = "*"
 
 [tool.black]
 line-length = 100
