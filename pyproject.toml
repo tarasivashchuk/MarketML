@@ -16,6 +16,7 @@ pandas_datareader = "*"
 tensorflow = "*"
 yahoo_fin = "*"
 backtrader = "*"
+scikit-learn = "^0.23.1"
 
 [tool.poetry.dev-dependencies]
 black = {version="*", allow-prereleases=true}
