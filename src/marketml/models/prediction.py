@@ -32,7 +32,6 @@ class PricePredictor:
             for _ in range(num_attention_layers)
         ]
 
-        """Construct model"""
         input_sequence = Input(shape=(self.sequence_length, self.sequence_width))
         x = time_embedding(input_sequence)
         x = Concatenate(axis=-1)([input_sequence, x])
