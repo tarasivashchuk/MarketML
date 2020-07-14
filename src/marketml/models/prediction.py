@@ -1,6 +1,5 @@
 from typing import Tuple, Dict, Union
 
-from tensorflow.python.keras.layers import concatenate
 from tensorflow.python.keras.losses import Loss
 from tensorflow.python.keras.optimizers import Optimizer
 
@@ -36,20 +35,21 @@ class PricePredictor:
         """Construct model"""
         input_sequence = Input(shape=(self.sequence_length, self.sequence_width))
         x = time_embedding(input_sequence)
-        x = Concatenate([input_sequence, x])
+        x = Concatenate(axis=-1)([input_sequence, x])
+
         for idx in range(num_attention_layers):
             x = attention_layers[idx]((x, x, x))
+
         x = GlobalAveragePooling1D(data_format="channels_first")(x)
+
         for layer_size in range(len(dense_layers)):
             if dropout is not None:
                 x = Dropout(dropout)(x)
             x = Dense(layer_size, activation="relu")(x)
+
         if dropout is not None:
             x = Dropout(dropout)(x)
         y = Dense(1, activation="linear")(x)
-
-        optimizer = self.transformer.get("optimizer")
-        loss = self.transformer.get("loss")
 
         model = Model(inputs=input_sequence, outputs=y)
         return model
@@ -60,3 +60,12 @@ class PricePredictor:
         loss = "mse" if loss is None else loss
         model.compile(loss=loss, optimizer=optimizer, metrics=["mae", "mape"])
         return model
+
+    def build(self):
+        pass
+
+    def train(self):
+        pass
+
+    def predict(self):
+        pass
