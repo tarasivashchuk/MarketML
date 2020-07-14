@@ -65,7 +65,7 @@ class MultiAttention(Layer):
             bias_initializer="glorot_uniform",
         )
 
-    def call(self, inputs):
+    def call(self, inputs, **kwargs):
         attn = [self.attn_heads[i](inputs) for i in range(self.n_heads)]
         concat_attn = tf.concat(attn, axis=-1)
         multi_linear = self.linear(concat_attn)
@@ -93,7 +93,7 @@ class TransformerEncoder(Layer):
         self.ff_dropout = Dropout(self.dropout_rate)
         self.ff_normalize = LayerNormalization(input_shape=input_shape, epsilon=1e-6)
 
-    def call(self, inputs):  # inputs = (in_seq, in_seq, in_seq)
+    def call(self, inputs, **kwargs):  # inputs = (in_seq, in_seq, in_seq)
         attn_layer = self.attn_multi(inputs)
         attn_layer = self.attn_dropout(attn_layer)
         attn_layer = self.attn_normalize(inputs[0] + attn_layer)
