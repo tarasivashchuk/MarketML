@@ -48,8 +48,15 @@ class PricePredictor:
             x = Dropout(dropout)(x)
         y = Dense(1, activation="linear")(x)
 
+        optimizer = self.transformer.get("optimizer")
+        loss = self.transformer.get("loss")
+
         model = Model(inputs=input_sequence, outputs=y)
-        optimizer = self.transformer["optimizer"]
-        loss = self.transformer["loss"]
+        return model
+
+    @staticmethod
+    def compile_model(model: Model, optimizer: Union[str, Optimizer, None], loss: Union[str, Loss, None]):
+        optimizer = "adam" if optimizer is None else optimizer
+        loss = "mse" if loss is None else loss
         model.compile(loss=loss, optimizer=optimizer, metrics=["mae", "mape"])
         return model
