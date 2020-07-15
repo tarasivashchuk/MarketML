@@ -2,7 +2,7 @@
 authors     = ["Taras Ivashchuk <taras@tarasivashchuk.com>"]
 description = "Algorithmic trading using deep learning"
 name        = "marketml"
-version = "0.3.0"
+version = "0.3.1"
 
 [tool.poetry.dependencies]
 python = "^3.8"
