@@ -1,4 +1,5 @@
 import sqlite3
+from typing import Optional, List, Union
 
 import numpy as np
 import pandas as pd
@@ -14,7 +15,7 @@ class StockPreprocessor:
     price_columns = ["open", "high", "low", "close"]
     value_columns = ["volume"]
 
-    def __init__(self, db: str, table: str, drop_columns: Optional[List[str]] = None):
+    def __init__(self, db: str = "stocks.sqlite", table: str = "prices", drop_columns: Optional[List[str]] = None):
         if drop_columns is not None:
             self.drop_columns = drop_columns
 
@@ -25,7 +26,7 @@ class StockPreprocessor:
 
     def __call__(self, ticker):
         df = self.load_data(ticker)
-        df = self.drop_columns(df)
+        df = self.drop(df)
         for replacement_col, replacement_val in self.replacements:
             df = self.replace_values(df, replacement_col, replacement_val)
         df = self.calculate_pct_change(df)
@@ -43,7 +44,7 @@ class StockPreprocessor:
         df.sort_index(inplace=True)
         return df
 
-    def drop_columns(self, df: pd.DataFrame):
+    def drop(self, df: pd.DataFrame):
         df.drop(columns=self.drop_columns, inplace=True)
         return df
 
