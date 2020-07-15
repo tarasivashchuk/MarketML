@@ -12,23 +12,23 @@ from tensorflow.keras.models import Model
 class PricePredictor:
     """Predict future stock prices with time series/sequence models."""
 
-    def __init__(self, sequence_shape: Tuple[int, int], transformer: Dict[str:Union[str, int, Optimizer, Loss]]):
+    def __init__(self, sequence_shape: Tuple[int, int], ):
         self.sequence_length, self.sequence_width = sequence_shape
-        self.transformer = transformer
+        self.model = None
 
-    def build_transformer(self):
+    def build_transformer(self, transformer: Dict, compile: bool = True):
         """Build a transformer model according to provided parameters."""
         time_embedding = Time2Vector(self.sequence_length)
 
-        num_attention_layers = self.transformer["num_attention_layers"]
-        num_heads = self.transformer["num_heads"]
-        key_width, value_width, ff_width = self.transformer["dense_widths"]
+        num_attention_layers = transformer["num_attention_layers"]
+        num_attention_heads = transformer["num_attention_heads"]
+        attention_key_size, attention_value_size, attention_dense_size = transformer["attention_sizes"]
 
-        dense_layers = self.transformer["dense_layers"]
-        dropout = self.transformer["dropout"]
+        output_dense_sizes = transformer["output_dense_sizes"]
+        dropout = transformer["dropout"]
 
         attention_layers = [
-            TransformerEncoder(key_width, value_width, num_heads, ff_width)
+            TransformerEncoder(attention_key_size, attention_value_size, num_attention_heads, attention_dense_size)
             for _ in range(num_attention_layers)
         ]
 
@@ -41,7 +41,7 @@ class PricePredictor:
 
         x = GlobalAveragePooling1D(data_format="channels_first")(x)
 
-        for layer_size in range(len(dense_layers)):
+        for layer_size in range(len(output_dense_sizes)):
             if dropout is not None:
                 x = Dropout(dropout)(x)
             x = Dense(layer_size, activation="relu")(x)
@@ -51,10 +51,14 @@ class PricePredictor:
         y = Dense(1, activation="linear")(x)
 
         model = Model(inputs=input_sequence, outputs=y)
+        if compile:
+            # TODO: Add optimizer, loss params
+            model = self.compile_model(model, None, None)
+        self.model = model
         return model
 
     @staticmethod
-    def compile_model(model: Model, optimizer: Union[str, Optimizer, None], loss: Union[str, Loss, None]):
+    def compile_model(model: Model, optimizer, loss):
         optimizer = "adam" if optimizer is None else optimizer
         loss = "mse" if loss is None else loss
         model.compile(loss=loss, optimizer=optimizer, metrics=["mae", "mape"])
