@@ -9,7 +9,7 @@ from tensorflow.python.keras.models import Model
 
 import marketml
 from marketml.data.stocks import StockPreprocessor
-from marketml.models.models import PricePredictor
+from marketml.models.tf_models import PricePredictor
 
 
 logger = logzero.setup_logger(__file__)
