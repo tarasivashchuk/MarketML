@@ -1055,18 +1055,6 @@ six = "*"
 
 [[package]]
 category = "main"
-description = "Python datetimes made easy"
-name = "pendulum"
-optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
-version = "2.1.1"
-
-[package.dependencies]
-python-dateutil = ">=2.6,<3.0"
-pytzdata = ">=2020.1"
-
-[[package]]
-category = "main"
 description = "Pexpect allows easy control of interactive console applications."
 marker = "python_version >= \"3.3\" and sys_platform != \"win32\" or sys_platform != \"win32\""
 name = "pexpect"
@@ -1322,14 +1310,6 @@ description = "World timezone definitions, modern and historical"
 name = "pytz"
 optional = false
 python-versions = "*"
-version = "2020.1"
-
-[[package]]
-category = "main"
-description = "The Olson timezone database for Python."
-name = "pytzdata"
-optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "2020.1"
 
 [[package]]
@@ -1733,6 +1713,22 @@ numpy = "*"
 
 [[package]]
 category = "main"
+description = "image and video datasets and models for torch deep learning"
+name = "torchvision"
+optional = false
+python-versions = "*"
+version = "0.6.1"
+
+[package.dependencies]
+numpy = "*"
+pillow = ">=4.1.1"
+torch = "1.5.1"
+
+[package.extras]
+scipy = ["scipy"]
+
+[[package]]
+category = "main"
 description = "Tornado is a Python web framework and asynchronous networking library, originally developed at FriendFeed."
 name = "tornado"
 optional = false
@@ -1907,7 +1903,7 @@ python-versions = "*"
 version = "0.8.6"
 
 [metadata]
-content-hash = "caada9f35d2cac87729557ae6455b6c722b30d3f99a8c601fc93446e79d3c4fe"
+content-hash = "b1b19fda15d19f4b2eeaacd0f52e77a29eac540dea9d4bcfed4da17871cce024"
 python-versions = "^3.8"
 
 [metadata.files]
@@ -2515,29 +2511,6 @@ patsy = [
     {file = "patsy-0.5.1-py2.py3-none-any.whl", hash = "sha256:5465be1c0e670c3a965355ec09e9a502bf2c4cbe4875e8528b0221190a8a5d40"},
     {file = "patsy-0.5.1.tar.gz", hash = "sha256:f115cec4201e1465cd58b9866b0b0e7b941caafec129869057405bfe5b5e3991"},
 ]
-pendulum = [
-    {file = "pendulum-2.1.1-cp27-cp27m-macosx_10_15_x86_64.whl", hash = "sha256:96e505bc691ae3e7c268b803f21e5f8df60ee232bf02bad4f7c9a03dfaad6497"},
-    {file = "pendulum-2.1.1-cp27-cp27m-win_amd64.whl", hash = "sha256:78796e50be4ee8e70dfcceb3de41c50d345c8f44a90d1aca071643dd56f6ede0"},
-    {file = "pendulum-2.1.1-cp35-cp35m-macosx_10_15_x86_64.whl", hash = "sha256:6885bba9b69a832227d05dd8efccce57a0945e64369a656a4def7a77e3e6bac1"},
-    {file = "pendulum-2.1.1-cp35-cp35m-manylinux1_i686.whl", hash = "sha256:777bc1ad267e6976ac023c051f00ea88b9f270e7cc407f4b1e9c4e4d42a766d2"},
-    {file = "pendulum-2.1.1-cp35-cp35m-manylinux1_x86_64.whl", hash = "sha256:63f19df4af2b8d2d806c2cab8f327f78eef4ced688e911bd529b88bca92342b1"},
-    {file = "pendulum-2.1.1-cp35-cp35m-win_amd64.whl", hash = "sha256:3952247f6110fed884edc219be51d0c40a339e892bb4aa24631413e0fd5704eb"},
-    {file = "pendulum-2.1.1-cp36-cp36m-macosx_10_15_x86_64.whl", hash = "sha256:f69a4ff9b57f934f077c6a19cc6612b2a3ad07190f47a1ffe2f143860dcef945"},
-    {file = "pendulum-2.1.1-cp36-cp36m-manylinux1_i686.whl", hash = "sha256:0f5ede5e36d781e88346e9ac77f2e23459f1eb6a428545d944206517cd97202c"},
-    {file = "pendulum-2.1.1-cp36-cp36m-manylinux1_x86_64.whl", hash = "sha256:ac74cfdd510a7b60dde5f784be3dc11bc2a51910d78aebbe48fd7ebb1cbc91af"},
-    {file = "pendulum-2.1.1-cp36-cp36m-win_amd64.whl", hash = "sha256:5e1e3b419198028de731d41bb2e2fe3be50c3562f384781d87c30a2127c0fb97"},
-    {file = "pendulum-2.1.1-cp37-cp37m-macosx_10_15_x86_64.whl", hash = "sha256:d45342d158a736abc4c52e2de0b95971ed42588b330f18549c13750029ec9875"},
-    {file = "pendulum-2.1.1-cp37-cp37m-manylinux1_i686.whl", hash = "sha256:0ac7c282f5416988cd5f1176cde4d5abb3aae2f0059256ddbab4424958c993aa"},
-    {file = "pendulum-2.1.1-cp37-cp37m-manylinux1_x86_64.whl", hash = "sha256:33b9ae514a0f0d6b1aa01a9f00248a208b9d1af9a591f8945b0eda54c00153f0"},
-    {file = "pendulum-2.1.1-cp37-cp37m-win_amd64.whl", hash = "sha256:1e7fbed644a94c00d6488f50dfe9a254e5a2be6424fe87e7462ce9c5b62afee7"},
-    {file = "pendulum-2.1.1-cp38-cp38-macosx_10_15_x86_64.whl", hash = "sha256:dfe73a2c3a77f1a5d505288c1fe022032bf5e7cee539a52e8092d59dd01093ed"},
-    {file = "pendulum-2.1.1-cp38-cp38-manylinux1_i686.whl", hash = "sha256:bd211bf6ea8830955723305cca5b6bb54631af4466d0e2fb3ae108f67d847aed"},
-    {file = "pendulum-2.1.1-cp38-cp38-manylinux1_x86_64.whl", hash = "sha256:c922ed6b1568503b0db53ae0e3d96fc0c604579f7c1e9e6244d9f520e06dd9d4"},
-    {file = "pendulum-2.1.1-cp38-cp38-win_amd64.whl", hash = "sha256:150b19321ab9c277cc9fceddb985ed8f328ad533cef937c91ad0dfaee36d21e8"},
-    {file = "pendulum-2.1.1-cp39-cp39-manylinux1_i686.whl", hash = "sha256:951427c477501cc413b80a457ff05e5e4fe21ee55ca46e54ac1fab6e83e18c9c"},
-    {file = "pendulum-2.1.1-cp39-cp39-manylinux1_x86_64.whl", hash = "sha256:14804e3f61f934cacc8d5a925f99836a4084221cfaf237b26067199a78f117a9"},
-    {file = "pendulum-2.1.1.tar.gz", hash = "sha256:d97739a7a5d5fc64e98bab46b292ac9f15aee88b5d3851cd6037d011a7b18af0"},
-]
 pexpect = [
     {file = "pexpect-4.8.0-py2.py3-none-any.whl", hash = "sha256:0b48a55dcb3c05f3329815901ea4fc1537514d6ba867a152b581d69ae3710937"},
     {file = "pexpect-4.8.0.tar.gz", hash = "sha256:fc65a43959d153d0114afe13997d439c22823a27cefceb5ff35c2178c6784c0c"},
@@ -2721,10 +2694,6 @@ python-dateutil = [
 pytz = [
     {file = "pytz-2020.1-py2.py3-none-any.whl", hash = "sha256:a494d53b6d39c3c6e44c3bec237336e14305e4f29bbf800b599253057fbb79ed"},
     {file = "pytz-2020.1.tar.gz", hash = "sha256:c35965d010ce31b23eeb663ed3cc8c906275d6be1a34393a1d73a41febf4a048"},
-]
-pytzdata = [
-    {file = "pytzdata-2020.1-py2.py3-none-any.whl", hash = "sha256:e1e14750bcf95016381e4d472bad004eef710f2d6417240904070b3d6654485f"},
-    {file = "pytzdata-2020.1.tar.gz", hash = "sha256:3efa13b335a00a8de1d345ae41ec78dd11c9f8807f522d39850f2dd828681540"},
 ]
 pywavelets = [
     {file = "PyWavelets-1.1.1-cp35-cp35m-macosx_10_6_intel.whl", hash = "sha256:35959c041ec014648575085a97b498eafbbaa824f86f6e4a59bfdef8a3fe6308"},
@@ -3032,6 +3001,16 @@ torch = [
     {file = "torch-1.5.1-cp37-none-macosx_10_9_x86_64.whl", hash = "sha256:bb2a3e6c9c9dbfda856bd1b1a55d88789a9488b569ffba9cd6d9aa536ef866ba"},
     {file = "torch-1.5.1-cp38-cp38-manylinux1_x86_64.whl", hash = "sha256:c42658f2982591dc4d0459645c9ab26e0ce18aa7ab0993c27c8bcb1c98931d11"},
     {file = "torch-1.5.1-cp38-none-macosx_10_9_x86_64.whl", hash = "sha256:ff1dbeaa017bae66036e8e7a698a5475ac5a0d7b0a690f0a04ac3b1133b1feb3"},
+]
+torchvision = [
+    {file = "torchvision-0.6.1-cp35-cp35m-macosx_10_6_x86_64.whl", hash = "sha256:eb6d7ef73ab8ed756d18c1c11ead3ba1be7b3e2fe5bf475e16a4426d7f3d6eec"},
+    {file = "torchvision-0.6.1-cp35-cp35m-manylinux1_x86_64.whl", hash = "sha256:c122386a4604a6b611626d817981777bb06e747161a4954e4037c2e297fe1d86"},
+    {file = "torchvision-0.6.1-cp36-cp36m-macosx_10_9_x86_64.whl", hash = "sha256:9a544f241e1df7485c1fda64f06af4962ad4af1da6caeda352757ea800dd794d"},
+    {file = "torchvision-0.6.1-cp36-cp36m-manylinux1_x86_64.whl", hash = "sha256:c44819c3c903f2d6d269713a9aa81a9dcb0ab7716b4fc4dbdccf596e6fe894c9"},
+    {file = "torchvision-0.6.1-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:b07e7c5a7274082a8bbe88975c817da10bffaf4020017347d185b5d4eacb891d"},
+    {file = "torchvision-0.6.1-cp37-cp37m-manylinux1_x86_64.whl", hash = "sha256:52be3710bf495fee9eb8f1cb4d310edd2da94b127b2ca0aa77075c1001bcbb91"},
+    {file = "torchvision-0.6.1-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:80a8beaa3416035c9640d153b1f0a7c9b09aac8037a032bbc33fd4bc8657b091"},
+    {file = "torchvision-0.6.1-cp38-cp38-manylinux1_x86_64.whl", hash = "sha256:3af59c61d20bb0bb63dbd50f324fcd975fc5b89fb78e6b5714ae613cd7b734cc"},
 ]
 tornado = [
     {file = "tornado-6.0.4-cp35-cp35m-win32.whl", hash = "sha256:5217e601700f24e966ddab689f90b7ea4bd91ff3357c3600fa1045e26d68e55d"},

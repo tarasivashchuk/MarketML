@@ -23,6 +23,8 @@ u8darts = "*"
 click = "*"
 fire = "^0.3.1"
 ta = "^0.5.25"
+torch = "^1.5.1"
+torchvision = "^0.6.1"
 
 [tool.poetry.dev-dependencies]
 black = { version = "*", allow-prereleases = true }
