@@ -1,27 +1,31 @@
 [tool.poetry]
-authors     = ["Taras Ivashchuk <taras@tarasivashchuk.com>"]
+authors = ["Taras Ivashchuk <taras@tarasivashchuk.com>"]
 description = "Algorithmic trading using deep learning"
-name        = "marketml"
-version = "0.3.1"
+name = "marketml"
+version = "0.3.2"
 
 [tool.poetry.dependencies]
 python = "^3.8"
 jupyter = "*"
 logzero = "*"
-pendulum = "*"
 tqdm = "*"
 plotly = "*"
 pandas = "*"
 pandas_datareader = "*"
+pandas-profiling = "*"
+sqlalchemy = "*"
 tensorflow = "*"
 yahoo_fin = "*"
 backtrader = "*"
-scikit-learn = "^0.23.1"
-u8darts = "^0.2.2"
-click = "^7.1.2"
+scikit-learn = "*"
+holidays = "<=0.10.2"
+u8darts = "*"
+click = "*"
+fire = "^0.3.1"
+ta = "^0.5.25"
 
 [tool.poetry.dev-dependencies]
-black = {version="*", allow-prereleases=true}
+black = { version = "*", allow-prereleases = true }
 isort = "*"
 pytest = "*"
 flake8 = "*"
@@ -31,4 +35,4 @@ line-length = 100
 
 [build-system]
 build-backend = "poetry.masonry.api"
-requires      = ["poetry>=0.12"]
+requires = ["poetry>=0.12"]
