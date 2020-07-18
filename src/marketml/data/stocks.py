@@ -10,12 +10,17 @@ import marketml
 class StockPreprocessor:
     """Preprocess any number of stock time series data into ready-to-use model input."""
 
-    drop_columns = ["ticker", "adjusted_close", "dividend_amount", "split_coefficient"]
+    drop_columns = ["ticker", "dividend_amount", "split_coefficient"]
     replacements = [("volume", 0)]
     price_columns = ["open", "high", "low", "close"]
     value_columns = ["volume"]
 
-    def __init__(self, db: str = "stocks.sqlite", table: str = "prices", drop_columns: Optional[List[str]] = None):
+    def __init__(
+        self,
+        db: str = "stocks.sqlite",
+        table: str = "prices",
+        drop_columns: Optional[List[str]] = None,
+    ):
         if drop_columns is not None:
             self.drop_columns = drop_columns
 
@@ -70,27 +75,35 @@ class StockPreprocessor:
         return df
 
     def split_data(self, train_size: float, test_size: float):
-        train_df = self.df.iloc[: int(len(self.df) * train_size)]
-        test_df = self.df.iloc[
-            int(len(self.df) * train_size) : int(len(self.df) * (train_size + test_size))
+        self.data: pd.DataFrame
+        train_df = self.data.iloc[: int(len(self.data) * train_size)]
+        test_df = self.data.iloc[
+            int(len(self.data) * train_size) : int(len(self.data) * (train_size + test_size))
         ]
-        val_df = self.df.iloc[int(len(self.df) * (train_size + test_size)) :]
+        val_df = self.data.iloc[int(len(self.data) * (train_size + test_size)) :]
         return train_df, test_df, val_df
 
-    def chunk_sequences(self, df: pd.DataFrame, sequence_length: int):
+    @staticmethod
+    def chunk_sequences(df: pd.DataFrame, sequence_length: int):
         data = df.values
         x, y = [], []
         for i in range(sequence_length, len(data)):
-            x.append(
-                data[i - sequence_length : i]
-            )  # Chunks of training data with a length of 128 df-rows
-            y.append(data[:, 3][i])  # Value of 4th column (Close Price) of df-row 128+1
+            x.append(data[i - sequence_length : i])
+            y.append(data[:, 3][i])
         return np.array(x), np.array(y)
 
-    def process(self, train_size: float = 0.8, test_size: float = 0.1, sequence_length: int = 30):
+    def process(
+        self,
+        split: bool = True,
+        train_size: float = 0.8,
+        test_size: float = 0.1,
+        sequence_length: int = 30,
+    ):
         if train_size + test_size >= 1.0:
             raise ValueError("Train and test size sum must be less than 1")
-        self.df = pd.concat(self.data)
+        self.data = pd.concat(self.data)
+        if not split:
+            return self.data
         train, test, val = self.split_data(train_size, test_size)
         train, test, val = (
             self.chunk_sequences(train, sequence_length),
