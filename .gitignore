@@ -82,3 +82,5 @@ docs/_build/
 .DS_Store
 reference
 logs
+/data/db/earnings.sqlite
+/data/db/news.sqlite
