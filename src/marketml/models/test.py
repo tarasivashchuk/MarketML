@@ -9,7 +9,7 @@ from tensorflow.python.keras.models import Model
 
 import marketml
 from marketml.data.stocks import StockPreprocessor
-from marketml.models.models import PricePredictor
+from marketml.models.tf_models import PricePredictor
 
 
 logger = logzero.setup_logger(__file__)
@@ -52,16 +52,16 @@ def setup_transformer(
 # @click.option("--batch_size", type=int, default=8)
 # @click.option("--epochs", type=int, default=5)
 def train(
-    ticker: str,
-    num_attention: int,
-    num_heads: int,
-    key_size: int,
-    value_size: int,
-    dense_size: int,
-    out_dense_sizes: Union[List[int], str],
-    dropout: float,
-    batch_size: int,
-    epochs: int,
+    ticker: str = "A",
+    num_attention: int = 12,
+    num_heads: int = 8,
+    key_size: int = 64,
+    value_size: int = 64,
+    dense_size: int = 64,
+    out_dense_sizes: Union[List[int], str] = [128, 64],
+    dropout: float = 0.25,
+    batch_size: int = 5,
+    epochs: int = 5,
 ) -> Model:
     out_dense_sizes = (
         [int(size) for size in out_dense_sizes.split(" ")]
@@ -120,4 +120,5 @@ def train(
 
 if __name__ == "__main__":
     # python models/test.py train --num_attention 5 --num_heads 12 --key_size 128 --value_size 64 --dense_size 128 --out_dense_sizes "128 64"
-    fire.Fire(name="MarketML Model Tests")
+    # fire.Fire(name="MarketML Model Tests")
+    train()

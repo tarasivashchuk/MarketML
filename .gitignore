@@ -72,7 +72,7 @@ docs/_build/
 .ipynb_checkpoints
 .env
 .mypy_cache
-
+.venv
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
@@ -82,3 +82,4 @@ docs/_build/
 .DS_Store
 reference
 logs
+/data
