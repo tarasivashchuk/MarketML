@@ -1,18 +1,21 @@
-from typing import Tuple, Dict, Union
+from typing import Dict, Tuple, Union
 
+from tensorflow.keras.layers import Concatenate, Dense, Dropout, GlobalAveragePooling1D, Input
+from tensorflow.keras.models import Model
 from tensorflow.python.keras.losses import Loss
 from tensorflow.python.keras.optimizers import Optimizer
 
 from marketml.models.time import Time2Vector
 from marketml.models.transformer import TransformerEncoder
-from tensorflow.keras.layers import Concatenate, Dense, Dropout, GlobalAveragePooling1D, Input
-from tensorflow.keras.models import Model
 
 
 class PricePredictor:
     """Predict future stock prices with time series/sequence models."""
 
-    def __init__(self, sequence_shape: Tuple[int, int], ):
+    def __init__(
+        self,
+        sequence_shape: Tuple[int, int],
+    ):
         self.sequence_length, self.sequence_width = sequence_shape
         self.model = None
 
@@ -22,13 +25,17 @@ class PricePredictor:
 
         num_attention_layers = transformer["num_attention_layers"]
         num_attention_heads = transformer["num_attention_heads"]
-        attention_key_size, attention_value_size, attention_dense_size = transformer["attention_sizes"]
+        attention_key_size, attention_value_size, attention_dense_size = transformer[
+            "attention_sizes"
+        ]
 
         output_dense_sizes = transformer["output_dense_sizes"]
         dropout = transformer["dropout"]
 
         attention_layers = [
-            TransformerEncoder(attention_key_size, attention_value_size, num_attention_heads, attention_dense_size)
+            TransformerEncoder(
+                attention_key_size, attention_value_size, num_attention_heads, attention_dense_size
+            )
             for _ in range(num_attention_layers)
         ]
 

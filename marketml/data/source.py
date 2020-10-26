@@ -1,13 +1,12 @@
 import asyncio
 from typing import List
 
+import aiohttp
 import numpy as np
 import pandas as pd
-from tqdm.auto import tqdm
-
-import aiohttp
 from aiostream import stream
 from pandas_datareader import DataReader
+from tqdm.auto import tqdm
 from yahoo_fin import stock_info as si
 
 host = "https://query2.finance.yahoo.com/v10/finance/quoteSummary/"

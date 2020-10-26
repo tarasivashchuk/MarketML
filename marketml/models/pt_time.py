@@ -5,14 +5,29 @@ import torch.nn as nn
 
 
 class Time2Vector(nn.Module):
-
     def __init__(self, vector_length):
         super(Time2Vector, self).__init__()
         self.vector_length = vector_length
-        self.linear_weights = nn.Parameter(torch.zeros(self.vector_length,))
-        self.linear_bias = nn.Parameter(torch.ones(self.vector_length,))
-        self.periodic_weights = nn.Parameter(torch.zeros(self.vector_length, ))
-        self.periodic_bias = nn.Parameter(torch.ones(self.vector_length, ))
+        self.linear_weights = nn.Parameter(
+            torch.zeros(
+                self.vector_length,
+            )
+        )
+        self.linear_bias = nn.Parameter(
+            torch.ones(
+                self.vector_length,
+            )
+        )
+        self.periodic_weights = nn.Parameter(
+            torch.zeros(
+                self.vector_length,
+            )
+        )
+        self.periodic_bias = nn.Parameter(
+            torch.ones(
+                self.vector_length,
+            )
+        )
 
     def forward(self, x):
         x = torch.mean(x[:, :, :4], dim=-1)

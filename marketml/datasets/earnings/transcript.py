@@ -1,19 +1,15 @@
 import asyncio
 import sqlite3
-
 from concurrent.futures import ThreadPoolExecutor
 from itertools import chain
 
 import pandas as pd
 import regex
-
 from aiohttp import ClientSession, ClientTimeout, TCPConnector
 from bs4 import BeautifulSoup
 from more_itertools import chunked
 from tqdm.auto import tqdm
-
 from voxpredict import data
-
 
 session: ClientSession
 request_counter = tqdm(desc="Request Counter")
@@ -126,7 +122,10 @@ async def scrape_transcript_urls():
             ]
             df = pd.concat(dfs)
             df.to_sql(
-                name="transcript_final", con=db_connection, index=False, if_exists="append",
+                name="transcript_final",
+                con=db_connection,
+                index=False,
+                if_exists="append",
             )
     db_connection.close()
 

@@ -1,7 +1,7 @@
 """CLI program for building, training, testing, and using models."""
 
 from datetime import datetime as dt
-from typing import Dict, Any, List, Optional, Union
+from typing import Any, Dict, List, Optional, Union
 
 import fire
 import logzero
@@ -10,7 +10,6 @@ from tensorflow.python.keras.models import Model
 import marketml
 from marketml.data.stocks import StockPreprocessor
 from marketml.models.tf_models import PricePredictor
-
 
 logger = logzero.setup_logger(__file__)
 

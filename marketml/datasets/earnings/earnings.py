@@ -4,12 +4,9 @@ import sqlite3
 
 import pandas as pd
 import regex
-
+import voxpredict.data.convert
 from aiohttp import ClientSession, TCPConnector
 from tqdm import tqdm
-
-import voxpredict.data.convert
-
 
 stream_url_regex = regex.compile(r"(http:.*.m3u8)(?:.*.<embed)")
 """Regex expression matching the audio stream URL."""
@@ -115,7 +112,8 @@ async def scrape(session: ClientSession, row_data):
 async def main(calls_data):
     try:
         async with ClientSession(
-            connector=TCPConnector(ssl=False, limit=25), headers=voxpredict.data.headers,
+            connector=TCPConnector(ssl=False, limit=25),
+            headers=voxpredict.data.headers,
         ) as sess:
             tasks = [scrape(sess, row) for row in calls_data]
             audio_data = [
@@ -127,7 +125,10 @@ async def main(calls_data):
         audio_df = pd.concat(audio_data)
         with sqlite3.connect(voxpredict.data.earnings_db_path) as sql_connection:
             audio_df.to_sql(
-                "call_references", con=sql_connection, index=False, if_exists="append",
+                "call_references",
+                con=sql_connection,
+                index=False,
+                if_exists="append",
             )
     except:
         asyncio.run(main(calls_data))

@@ -4,14 +4,16 @@ from pathlib import Path
 
 import aiofiles
 import aiomultiprocess
-from aiohttp import ClientSession, ClientTimeout, TCPConnector, client_exceptions, ServerDisconnectedError
-from tqdm.auto import tqdm
-
 import voxpredict
-
+from aiohttp import (
+    ClientSession,
+    ClientTimeout,
+    ServerDisconnectedError,
+    TCPConnector,
+    client_exceptions,
+)
+from tqdm.auto import tqdm
 from voxpredict import data
-
-
 
 
 class EarningsConferenceCallDownloader:
@@ -41,11 +43,13 @@ class EarningsConferenceCallDownloader:
             (ticker, quarter, year, _, _, url, call_id, chunks_cnt) = row
             export_filepath = export_dir.joinpath(f"{ticker}_{year}_Q{quarter}.aac")
             if chunks_cnt is not None and not export_filepath.exists():
-                earnings_calls_list.append([
-                    self._get_chunk_urls(url, call_id, chunks_cnt),
-                    [None] * int(chunks_cnt),
-                    export_filepath,
-                ])
+                earnings_calls_list.append(
+                    [
+                        self._get_chunk_urls(url, call_id, chunks_cnt),
+                        [None] * int(chunks_cnt),
+                        export_filepath,
+                    ]
+                )
         return earnings_calls_list
 
     @staticmethod
@@ -67,9 +71,13 @@ class EarningsConferenceCallDownloader:
     async def _get_call(self, call_info):
         try:
             async with TCPConnector(limit=self.connection_limit, ssl=False) as conn:
-                async with ClientSession(headers=self.HEADERS, connector=conn, conn_timeout=self.timeout) as session:
-                    downloads = [asyncio.create_task(self._fetch_chunk(session, url)) for url in call_info[0]]
-                    for request in downloads: #tqdm(downloads, total=len(downloads)):
+                async with ClientSession(
+                    headers=self.HEADERS, connector=conn, conn_timeout=self.timeout
+                ) as session:
+                    downloads = [
+                        asyncio.create_task(self._fetch_chunk(session, url)) for url in call_info[0]
+                    ]
+                    for request in downloads:  # tqdm(downloads, total=len(downloads)):
                         url, chunk = await request
                         call_info[1][call_info[0].index(url)] = chunk
                     await asyncio.sleep(0)
@@ -81,11 +89,12 @@ class EarningsConferenceCallDownloader:
             await asyncio.sleep(1.5)
             return await self._get_call(call_info)
 
-
     async def run(self):
         """Run the downloader with multiprocessing and multithreading."""
         pool_tasks = []
-        async with aiomultiprocess.Pool(processes=4, maxtasksperchild=64, childconcurrency=8, queuecount=2) as pool:
+        async with aiomultiprocess.Pool(
+            processes=4, maxtasksperchild=64, childconcurrency=8, queuecount=2
+        ) as pool:
             for call in self.calls_list:
                 pool_tasks.append(pool.apply(self._get_call, args=[call]))
             for download in tqdm(asyncio.as_completed(pool_tasks), total=len(pool_tasks)):
