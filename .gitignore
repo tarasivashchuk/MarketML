@@ -83,3 +83,4 @@ docs/_build/
 reference
 logs
 /data
+/venv
