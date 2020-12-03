@@ -24,7 +24,7 @@ class StockPreprocessor:
         if drop_columns is not None:
             self.drop_columns = drop_columns
 
-        db = str(marketml.project_dir.joinpath(f"data/db/{db}"))
+        db = str(marketml.project_root.joinpath(f"data/db/{db}"))
         self.db_connection = sqlite3.connect(db)
         self.table = table
         self.data = []

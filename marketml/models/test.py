@@ -107,7 +107,7 @@ def train(
 
     logger.info("Exporting model...")
     model_filename = f"{performance['loss']}-{dt.now()}.hdf5"
-    model.save(marketml.project_dir.joinpath(f"models/{model_filename}"))
+    model.save(marketml.project_root.joinpath(f"models/{model_filename}"))
 
     return model
 

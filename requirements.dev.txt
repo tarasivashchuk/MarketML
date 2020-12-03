@@ -1,0 +1,6 @@
+jupyter
+pytest
+black
+isort
+mypy
+flake8
