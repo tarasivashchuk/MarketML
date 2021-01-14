@@ -1,3 +1,40 @@
+<<<<<<< HEAD
+[tool.poetry]
+authors = ["Taras Ivashchuk <taras@tarasivashchuk.com>"]
+description = "Algorithmic trading using deep learning"
+name = "marketml"
+version = "0.3.2"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+jupyter = "*"
+logzero = "*"
+tqdm = "*"
+plotly = "*"
+pandas = "*"
+pandas_datareader = "*"
+pandas-profiling = "*"
+sqlalchemy = "*"
+tensorflow = "*"
+yahoo_fin = "*"
+backtrader = "*"
+scikit-learn = "*"
+holidays = "<=0.10.2"
+u8darts = "*"
+click = "*"
+fire = "^0.3.1"
+ta = "^0.5.25"
+torch = "^1.5.1"
+torchvision = "^0.6.1"
+
+[tool.poetry.dev-dependencies]
+black = { version = "*", allow-prereleases = true }
+isort = "*"
+pytest = "*"
+flake8 = "*"
+
+=======
+>>>>>>> master
 [tool.black]
 line-length = 100
 target-version = ['py38']

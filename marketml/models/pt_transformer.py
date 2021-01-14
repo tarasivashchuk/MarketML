@@ -3,6 +3,7 @@ import torch.nn as nn
 
 
 class SingleAttention(nn.Module):
+
     def __init__(self, key_size, value_size, input_shape):
         super(SingleAttention, self).__init__()
         self.key_size = key_size
@@ -25,17 +26,13 @@ class SingleAttention(nn.Module):
 
 
 class MultiAttention(nn.Module):
+
     def __init__(self, key_size, value_size, num_heads, input_shape):
         super(MultiAttention, self).__init__()
         self.key_size = key_size
         self.value_size = value_size
         self.num_heads = num_heads
-        self.attention_heads = [
-            self.attention_heads.append(
-                SingleAttention(self.key_size, self.value_size, input_shape)
-            )
-            for _ in range(self.num_heads)
-        ]
+        self.attention_heads = [self.attention_heads.append(SingleAttention(self.key_size, self.value_size, input_shape)) for _ in range(self.num_heads)]
         self.linear = nn.Linear(input_shape, input_shape[0][-1])
 
     def forward(self, x):
