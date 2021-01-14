@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="SqlDialectMappings">
-    <file url="notebook:///Users/taras/Code/projects/MarketML/notebooks/transformer.ipynb" dialect="GenericSQL" />
-    <file url="PROJECT" dialect="SQLite" />
-  </component>
-</project>
