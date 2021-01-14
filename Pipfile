@@ -1,0 +1,28 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+numpy = "<=1.19.3"
+scikit-learn = "*"
+tqdm = "*"
+pandas = "*"
+plotly = "*"
+yfinance = "*"
+SQLAlchemy = "*"
+torch = {path = "./torch-1.7.0+cu110-cp38-cp38-win_amd64.whl"}
+
+[dev-packages]
+jupyter = "*"
+pytest = "*"
+black = "*"
+isort = "*"
+mypy = "*"
+flake8 = "*"
+
+[requires]
+python_version = "3.8"
+
+[pipenv]
+allow_prereleases = true

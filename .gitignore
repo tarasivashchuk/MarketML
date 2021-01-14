@@ -54,7 +54,7 @@ docs/_build/
 .ipynb_checkpoints
 .env
 .mypy_cache
-
+.venv
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
@@ -64,6 +64,12 @@ docs/_build/
 .DS_Store
 reference
 logs
+<<<<<<< HEAD
 /data/db/earnings.sqlite
 /data/db/news.sqlite
 submodules/
+=======
+/data
+/venv
+.idea
+>>>>>>> master

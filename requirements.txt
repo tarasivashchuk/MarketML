@@ -1,0 +1,7 @@
+numpy<=1.19.3
+scikit-learn
+tqdm
+pandas
+plotly
+sqlalchemy
+yfinance
